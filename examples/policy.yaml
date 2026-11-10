@@ -1,0 +1,7 @@
+# Example policy for the demo shop database.
+database_url: sqlite:///examples/shop.db
+max_rows: 50
+timeout_ms: 2000
+denied_tables: [api_keys]
+denied_columns: [customers.email]
+audit_log: audit.jsonl

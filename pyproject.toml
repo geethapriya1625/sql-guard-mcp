@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sql-guard-mcp"
+version = "0.1.0"
+description = "A read-only SQL MCP server for AI agents: query guardrails, column masking, row caps, timeouts and an audit log."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Geetha Priya Kanikireddy" }]
+dependencies = [
+    "mcp>=2.0,<3",
+    "sqlglot>=26",
+    "pyyaml>=6.0",
+    "pydantic>=2.6",
+]
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]>=3.1"]
+dev = ["pytest>=8", "ruff>=0.5", "psycopg[binary]>=3.1"]
+
+[project.scripts]
+sql-guard-mcp = "sqlguard.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
